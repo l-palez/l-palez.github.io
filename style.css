@@ -345,7 +345,7 @@ section { padding: 130px 64px; border-top: 1px solid var(--border); }
   color: var(--blue);
   font-weight: 500;
   line-height: 1;
-  opacity: 0;
+  opacity: 1;
   transition: opacity .3s;
 }
 .bar-col:hover .bar-pct { opacity: 1; }
@@ -365,8 +365,6 @@ section { padding: 130px 64px; border-top: 1px solid var(--border); }
   background: var(--border);
   margin-top: 4px;
 }
-/* Animate bars in when revealed */
-.skills-chart.in .bar-fill { height: var(--h, 0); }
 
 /* ─── PROJECTS ──────────────────────────────────────── */
 .projects-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; }
