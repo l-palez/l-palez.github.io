@@ -32,7 +32,7 @@
 
   <div class="hero-intro">
     <div class="hero-photo-wrap">
-      <img src="images/profile.jpg" alt="Luka Palež" class="hero-photo">
+      <img src="https://api.dicebear.com/7.x/personas/svg?seed=LukaPalez&backgroundColor=2356d8&clothingColor=0d1e4a" alt="Luka Palež" class="hero-photo">
     </div>
     <h1 class="hero-name">
       Luka<br><em>Palež</em>
@@ -69,14 +69,46 @@
       </div>
     </div>
 
-    <div class="skills reveal reveal-delay">
-      <div class="skill"><span>HTML / CSS</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
-      <div class="skill"><span>JavaScript</span><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
-      <div class="skill"><span>Web dizajn</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
-      <div class="skill"><span>Figma</span><div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div></div>
-      <div class="skill"><span>Python (osnove)</span><div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div></div>
-      <div class="skill"><span>Blender 3D</span><div class="skill-bar"><div class="skill-fill" style="width:35%"></div></div></div>
-      <div class="skill"><span>Linux / Mreže</span><div class="skill-bar"><div class="skill-fill" style="width:50%"></div></div></div>
+    <div class="skills-chart reveal reveal-delay">
+      <div class="chart-title">Razina znanja</div>
+      <div class="bar-chart">
+        <div class="bar-col" data-level="85">
+          <div class="bar-wrap"><div class="bar-fill" style="height:85%"></div></div>
+          <div class="bar-pct">85%</div>
+          <div class="bar-label">HTML/CSS</div>
+        </div>
+        <div class="bar-col" data-level="60">
+          <div class="bar-wrap"><div class="bar-fill" style="height:60%"></div></div>
+          <div class="bar-pct">60%</div>
+          <div class="bar-label">JavaScript</div>
+        </div>
+        <div class="bar-col" data-level="75">
+          <div class="bar-wrap"><div class="bar-fill" style="height:75%"></div></div>
+          <div class="bar-pct">75%</div>
+          <div class="bar-label">Web dizajn</div>
+        </div>
+        <div class="bar-col" data-level="55">
+          <div class="bar-wrap"><div class="bar-fill" style="height:55%"></div></div>
+          <div class="bar-pct">55%</div>
+          <div class="bar-label">Figma</div>
+        </div>
+        <div class="bar-col" data-level="45">
+          <div class="bar-wrap"><div class="bar-fill" style="height:45%"></div></div>
+          <div class="bar-pct">45%</div>
+          <div class="bar-label">Python</div>
+        </div>
+        <div class="bar-col" data-level="35">
+          <div class="bar-wrap"><div class="bar-fill" style="height:35%"></div></div>
+          <div class="bar-pct">35%</div>
+          <div class="bar-label">Blender</div>
+        </div>
+        <div class="bar-col" data-level="50">
+          <div class="bar-wrap"><div class="bar-fill" style="height:50%"></div></div>
+          <div class="bar-pct">50%</div>
+          <div class="bar-label">Linux/Mreže</div>
+        </div>
+      </div>
+      <div class="chart-baseline"></div>
     </div>
 
   </div>
@@ -258,7 +290,20 @@ setTimeout(type, 1100);
 
 /* SCROLL REVEAL */
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      /* animate bar chart */
+      if (e.target.classList.contains('skills-chart')) {
+        e.target.querySelectorAll('.bar-fill').forEach(bar => {
+          const h = bar.style.height;
+          bar.style.height = '0';
+          requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.height = h; }));
+        });
+      }
+      obs.unobserve(e.target);
+    }
+  });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
